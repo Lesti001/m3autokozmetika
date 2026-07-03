@@ -1,0 +1,20 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+@import "tailwindcss";
+
+/* Design system (ui-ux-pro-max): premium dark slate + action red, Inter */
+@theme {
+  --font-sans: 'Inter', ui-sans-serif, system-ui, sans-serif;
+
+  --color-brand: #1e293b;
+  --color-brand-dark: #0f172a;
+  --color-accent: #0369a1;
+  --color-accent-hover: #075985;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: var(--font-sans);
+}
