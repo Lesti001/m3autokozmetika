@@ -26,7 +26,9 @@ function Navbar() {
   return (
     <nav
       className={`fixed inset-x-0 top-0 z-30 transition-colors duration-300 ${
-        solid ? 'bg-slate-900/95 shadow-lg backdrop-blur' : 'bg-transparent'
+        solid
+          ? 'border-b border-white/10 bg-slate-950/90 shadow-lg backdrop-blur-lg backdrop-saturate-150'
+          : 'border-b border-transparent bg-transparent'
       }`}
     >
       <div className="mx-auto flex max-w-7xl items-center justify-between px-4 py-4 sm:px-6 lg:px-8">

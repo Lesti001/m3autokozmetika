@@ -1,3 +1,5 @@
+import { useEffect, useRef, useState } from 'react'
+
 const iconProps = {
   className: 'h-7 w-7',
   fill: 'none',
@@ -129,6 +131,32 @@ const services = [
 ]
 
 function Services() {
+  const [visible, setVisible] = useState(() => new Set())
+  const cardsRef = useRef([])
+
+  useEffect(() => {
+    // Respect reduced-motion: reveal everything immediately, no animation
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+      setVisible(new Set(services.map((_, i) => i)))
+      return
+    }
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (!entry.isIntersecting) return
+          const index = Number(entry.target.dataset.index)
+          setVisible((prev) => new Set(prev).add(index))
+          observer.unobserve(entry.target)
+        })
+      },
+      { threshold: 0.15 },
+    )
+
+    cardsRef.current.forEach((el) => el && observer.observe(el))
+    return () => observer.disconnect()
+  }, [])
+
   return (
     <section id="szolgaltatasok" className="bg-slate-50 py-20 sm:py-28">
       <div className="mx-auto max-w-7xl px-6 sm:px-8">
@@ -142,17 +170,25 @@ function Services() {
         </div>
 
         <div className="mt-14 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
-          {services.map(({ icon: Icon, title, description }) => (
-            <article
+          {services.map(({ icon: Icon, title, description }, index) => (
+            <div
               key={title}
-              className="group rounded-2xl border border-slate-200 bg-white p-7 shadow-sm transition duration-300 hover:-translate-y-1 hover:border-sky-200 hover:shadow-md"
+              ref={(el) => (cardsRef.current[index] = el)}
+              data-index={index}
+              className={`transition-all duration-500 ease-out ${
+                visible.has(index) ? 'translate-y-0 opacity-100' : 'translate-y-8 opacity-0'
+              }`}
+              // Stagger cards left-to-right within each row
+              style={{ transitionDelay: `${(index % 3) * 90}ms` }}
             >
-              <div className="flex h-14 w-14 items-center justify-center rounded-xl bg-sky-50 text-sky-700 transition-colors duration-300 group-hover:bg-sky-700 group-hover:text-white">
-                <Icon />
-              </div>
-              <h3 className="mt-5 text-lg font-semibold text-slate-900">{title}</h3>
-              <p className="mt-3 text-sm leading-relaxed text-slate-600">{description}</p>
-            </article>
+              <article className="group h-full rounded-2xl border border-slate-200 bg-white p-7 shadow-sm transition duration-300 hover:-translate-y-1 hover:border-sky-200 hover:shadow-md">
+                <div className="flex h-14 w-14 items-center justify-center rounded-xl bg-sky-50 text-sky-700 transition-colors duration-300 group-hover:bg-sky-700 group-hover:text-white">
+                  <Icon />
+                </div>
+                <h3 className="mt-5 text-lg font-semibold text-slate-900">{title}</h3>
+                <p className="mt-3 text-sm leading-relaxed text-slate-600">{description}</p>
+              </article>
+            </div>
           ))}
         </div>
       </div>
