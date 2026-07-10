@@ -1,4 +1,5 @@
 import { useEffect, useRef, useState } from 'react'
+import { Link } from 'react-router-dom'
 
 const iconProps = {
   className: 'h-7 w-7',
@@ -165,7 +166,14 @@ function Services() {
             Szolgáltatásaink
           </h2>
           <p className="mt-4 text-base text-slate-500">
-            Az árakról tájékozódjon a kapcsolati fülön található elérhetőségek egyikén.
+            Áraink az{' '}
+            <Link
+              to="/arlista"
+              className="font-medium text-sky-600 underline decoration-sky-600/40 underline-offset-2 transition hover:text-sky-700 hover:decoration-sky-600"
+            >
+              árlista
+            </Link>{' '}
+            oldalon találhatóak.
           </p>
         </div>
 
@@ -190,6 +198,33 @@ function Services() {
               </article>
             </div>
           ))}
+        </div>
+
+        <div className="mx-auto mt-14 max-w-3xl rounded-2xl border border-slate-200 bg-white p-7 shadow-sm sm:p-8">
+          <div className="flex items-center gap-3">
+            <svg
+              className="h-5 w-5 shrink-0 text-sky-600"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+              strokeWidth={1.75}
+              aria-hidden="true"
+            >
+              <path strokeLinecap="round" strokeLinejoin="round" d="M12 9v3.75m0 3.75h.008M10.29 3.86 1.82 18a1.5 1.5 0 0 0 1.29 2.25h17.78A1.5 1.5 0 0 0 22.18 18L13.71 3.86a1.5 1.5 0 0 0-2.42 0z" />
+            </svg>
+            <h3 className="text-lg font-semibold text-slate-900">Fontos általános információk</h3>
+          </div>
+          <ul className="mt-4 list-disc space-y-3 pl-5 marker:text-sky-600">
+            {[
+              'Az autóban hagyott értéktárgyakért, a szolgáltatás során keletkezett esetleges beázásért, valamint a motormosásnál keletkezett elektromos beázásért felelősséget NEM vállalunk.',
+              'Erősen szennyezett autóknál felárat számíthatunk fel.',
+              'Autókozmetikai áraink a szennyeződés mértékétől és az autó méretétől függnek.',
+            ].map((text) => (
+              <li key={text} className="text-sm leading-relaxed text-slate-600">
+                {text}
+              </li>
+            ))}
+          </ul>
         </div>
       </div>
     </section>

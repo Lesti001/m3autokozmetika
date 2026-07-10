@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom'
 import { navItems } from '../navItems'
 
 function Footer() {
@@ -5,20 +6,21 @@ function Footer() {
     <footer className="bg-slate-950 text-slate-400">
       <div className="mx-auto max-w-7xl px-6 py-8 sm:px-8">
         <div className="flex flex-col items-center gap-6 md:flex-row md:justify-between">
-          <a href="#" aria-label="Kezdőlap" className="shrink-0">
+          <Link to="/" aria-label="Kezdőlap" className="flex shrink-0 items-center gap-2.5">
             <img src="/icon.png" alt="M3 Autókozmetika" className="h-10 w-auto" />
-          </a>
+            <span className="hidden text-lg font-semibold tracking-tight text-white sm:inline">M3 Autókozmetika</span>
+          </Link>
 
           <nav>
             <ul className="flex flex-wrap items-center justify-center gap-x-6 gap-y-2">
               {navItems.map((item) => (
                 <li key={item.label}>
-                  <a
-                    href={item.href}
+                  <Link
+                    to={item.href}
                     className="text-sm text-slate-400 transition hover:text-white"
                   >
                     {item.label}
-                  </a>
+                  </Link>
                 </li>
               ))}
             </ul>

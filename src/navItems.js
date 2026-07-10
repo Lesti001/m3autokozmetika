@@ -1,7 +1,7 @@
 export const navItems = [
-  { label: 'Kezdőlap', href: '#' },
-  { label: 'Szolgáltatásaink', href: '#' },
-  { label: 'Kapcsolat', href: '#' },
-  { label: 'Árlista', href: '#' },
-  { label: 'Munkáink', href: '#' },
+  { label: 'Kezdőlap', href: '/' },
+  { label: 'Szolgáltatásaink', href: '/#szolgaltatasok' },
+  { label: 'Kapcsolat', href: '/#kapcsolat' },
+  { label: 'Árlista', href: '/arlista' },
+  { label: 'Munkáink', href: '/' },
 ]

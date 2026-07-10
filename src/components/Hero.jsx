@@ -1,3 +1,5 @@
+import { Link } from 'react-router-dom'
+
 function Hero() {
   return (
     <section className="sticky top-0 z-0 h-dvh w-full overflow-hidden">
@@ -21,12 +23,12 @@ function Hero() {
           Polírozás, belső tisztítás és fényezés-védelem – hogy autója újra olyan legyen, mint új korában.
         </p>
 
-        <a
-          href="#kapcsolat"
+        <Link
+          to="/#kapcsolat"
           className="mt-9 inline-flex items-center justify-center rounded-full bg-sky-700 px-8 py-3.5 text-sm font-semibold text-white shadow-lg shadow-sky-700/25 transition hover:bg-sky-800 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-sky-500"
         >
           Kérjen ajánlatot
-        </a>
+        </Link>
       </div>
     </section>
   )

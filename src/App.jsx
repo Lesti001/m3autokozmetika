@@ -1,22 +1,19 @@
+import { BrowserRouter, Routes, Route } from 'react-router-dom'
 import Navbar from './components/Navbar'
-import Hero from './components/Hero'
-import Services from './components/Services'
-import Footer from './components/Footer'
+import ScrollToHash from './components/ScrollToHash'
+import Home from './pages/Home'
+import Arlista from './pages/Arlista'
 
 function App() {
   return (
-    <div className="relative min-h-screen">
+    <BrowserRouter>
+      <ScrollToHash />
       <Navbar />
-
-      <main>
-        <Hero />
-
-        <div className="relative z-10 overflow-hidden rounded-t-[2rem] bg-slate-50 shadow-[0_-24px_48px_rgba(0,0,0,0.18)] sm:rounded-t-[2.5rem]">
-          <Services />
-          <Footer />
-        </div>
-      </main>
-    </div>
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/arlista" element={<Arlista />} />
+      </Routes>
+    </BrowserRouter>
   )
 }
 
