@@ -27,6 +27,21 @@ function Navbar() {
 
   const solid = !isHome || scrolled || isOpen
 
+  // For in-page hash links: scroll on every click, even when the hash is already active
+  // (react-router won't emit a navigation for an unchanged URL, so ScrollToHash wouldn't fire).
+  const handleHashNav = (event, href) => {
+    if (!href.includes('#')) return
+    const [rawPath, id] = href.split('#')
+    const targetPath = rawPath || '/'
+    if (location.pathname !== targetPath) return // different page: let the router handle it
+    const el = document.getElementById(id)
+    if (!el) return
+    event.preventDefault()
+    el.scrollIntoView({ behavior: 'smooth' })
+    window.history.replaceState(null, '', href)
+    setIsOpen(false)
+  }
+
   return (
     <nav
       className={`fixed inset-x-0 top-0 z-30 transition-colors duration-300 ${
@@ -47,6 +62,7 @@ function Navbar() {
               <li key={item.label} className="group relative">
                 <Link
                   to={item.href}
+                  onClick={(e) => handleHashNav(e, item.href)}
                   className="relative text-sm font-medium text-white/85 transition after:absolute after:-bottom-1.5 after:left-0 after:h-0.5 after:w-0 after:bg-sky-500 after:transition-all after:duration-300 hover:text-white hover:after:w-full"
                 >
                   {item.label}
@@ -70,6 +86,7 @@ function Navbar() {
               <li key={item.label}>
                 <Link
                   to={item.href}
+                  onClick={(e) => handleHashNav(e, item.href)}
                   className="relative text-sm font-medium text-white/85 transition after:absolute after:-bottom-1.5 after:left-0 after:h-0.5 after:w-0 after:bg-sky-500 after:transition-all after:duration-300 hover:text-white hover:after:w-full"
                 >
                   {item.label}
@@ -102,7 +119,10 @@ function Navbar() {
             <li key={item.label}>
               <Link
                 to={item.href}
-                onClick={() => setIsOpen(false)}
+                onClick={(e) => {
+                  handleHashNav(e, item.href)
+                  setIsOpen(false)
+                }}
                 className="text-white/90 transition hover:text-white"
               >
                 {item.label}
