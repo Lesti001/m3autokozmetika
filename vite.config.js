@@ -5,5 +5,8 @@ import tailwindcss from '@tailwindcss/vite'
 // https://vite.dev/config/
 export default defineConfig({
   plugins: [react(), tailwindcss()],
-  server: process.env.PORT ? { port: Number(process.env.PORT) } : undefined,
+  server: {
+    host: true, // elérhető a belső hálózatról (0.0.0.0)
+    ...(process.env.PORT ? { port: Number(process.env.PORT) } : {}),
+  },
 })

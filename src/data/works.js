@@ -13,7 +13,7 @@ export const toThumb = (src) => src.replace('/tomoritett/', '/tomoritett/thumbs/
 export const beforeAfter = [
   { src: '/images/tomoritett/elotte_utana_14.jpg', w: 2048, h: 2048 },
   { src: '/images/tomoritett/elotte_utana_17.jpg', w: 2048, h: 2048 },
-  { src: '/images/tomoritett/elotte_utana_41.jpg', w: 2252, h: 4000 },
+  { src: '/images/tomoritett/elotte_utana_41.jpg', w: 2048, h: 2048 },
   { src: '/images/tomoritett/elotte_utana_71.jpg', w: 2048, h: 2048 },
   { src: '/images/tomoritett/elotte_utana_72.jpg', w: 2048, h: 2048 },
   { src: '/images/tomoritett/elotte_utana_11.jpg', w: 2880, h: 2880 },
